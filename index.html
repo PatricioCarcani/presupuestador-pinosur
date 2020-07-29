@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Presupuestador Pinosur</title>
+    <!--Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+
+    <!--VueJS-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+        input:not([type]),
+        input[type="text"]:not(.browser-default),
+        input[type="password"]:not(.browser-default),
+        input[type="email"]:not(.browser-default),
+        input[type="url"]:not(.browser-default),
+        input[type="time"]:not(.browser-default),
+        input[type="date"]:not(.browser-default),
+        input[type="datetime"]:not(.browser-default),
+        input[type="datetime-local"]:not(.browser-default),
+        input[type="tel"]:not(.browser-default),
+        input[type="number"]:not(.browser-default),
+        input[type="search"]:not(.browser-default),
+        textarea.materialize-textarea {
+            height: 5rem;
+            font-size: 26px;
+        }
+        
+        div#app {
+            padding-top: 70px;
+        }
+        
+        .input-field .prefix {
+            font-size: 39px;
+            top: 1.2rem;
+        }
+        
+        //centrar icons con texto
+        .icon-align {
+            vertical-align: text-bottom;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="app" class="container">
+
+        <div class="row">
+
+            <div class="input-field col s12">
+                <!-- ICONO para el input -->
+                <i class="material-icons prefix">attach_money</i>
+                <input v-model="precioIngresado" id="pantalla" placeholder="0.00" type="number" class="validate flow-text">
+                <label for="pantalla">PRECIO EFECTIVO</label>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <table class="striped highlight col s12 ">
+                <tbody id="tabla-cuotas">
+                    <tr>
+                        <td class="brown lighten-5">Precio en efectivo: $ {{ precioIngresado }}</td>
+                    </tr>
+                    <tr>
+                        <td class="orange lighten-5">Precio débito: $ {{ precioDebito }}</td>
+                    </tr>
+                    <tr>
+                        <td class="green darken-4 white-text">
+                            <i class="tiny material-icons">arrow_downward</i>
+                            <span>Precio en cuotas</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="light-green lighten-4">1 cuota de $ {{ precioLista }}</td>
+                    </tr>
+                    <tr>
+                        <td class="light-green lighten-3">3 cuotas de $ {{ precioTresCuotas }} (total $ {{ precioLista }})</td>
+                    </tr>
+                    <tr>
+                        <td class="light-green lighten-2">6 cuotas de $ {{ precioSeisCuotas }} (total $ {{ precioLista }})</td>
+                    </tr>
+                    <tr>
+                        <td class="light-green lighten-1">12 cuotas de $ {{ precioDoceCuotas }} (total $ {{ precioLista }})</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <!-- FOR para crear tabla de cuotas de 1 a 12 -->
+        <!--             <table class="striped highlight col s12 ">
+                <tbody id="tabla-cuotas ">
+                    <p class="flow-text">Precio de lista: $ {{ precioLista }}</p>
+
+            <tr v-for="n in 12 ">
+
+            <td v-if="n!=1 ">{{ n }} cuotas de </td>
+            <td v-else>{{ n }} cuota de </td>
+            <td>$ {{ redondear(precioLista / n) }}</td>
+            </tr>
+            </tbody>
+            </table> -->
+
+        <!-- <a class="waves-effect waves-light btn-large " onclick="obtenerContenidoPantalla(event) "><i class="material-icons left ">cloud</i>button</a> -->
+
+    </div>
+
+
+    <!--materialize js-->
+    <script type="text/javascript " src="js/materialize.min.js "></script>
+
+    <script>
+        const app = new Vue({
+            el: '#app', // elemento sobre el que se aplica vue
+            data: {
+                precioIngresado: '',
+                n: '1' // solo usado en v-for
+            },
+            computed: {
+                precioDebito: function() {
+                    return redondear(this.precioIngresado * 1.15);
+                },
+                precioLista: function() {
+                    return redondear(this.precioIngresado * 1.25);
+                },
+                precioTresCuotas: function() {
+                    return redondear(this.precioLista * 3);
+                },
+                precioSeisCuotas: function() {
+                    return redondear(this.precioLista * 6);
+                },
+                precioDoceCuotas: function() {
+                    return redondear(this.precioLista * 12);
+                }
+            }
+        })
+
+        function redondear(num) {
+            // existen muchos problemas para redondear precios con decimales en JS, este es el mejor método
+            return (Math.round(num * Math.pow(10, 2)) / Math.pow(10, 2)).toFixed(2);
+        }
+
+        /*
+              const cuotas = new Vue({
+                el: '#tabla-cuotas', // elemento sobre el que se aplica vue
+                data: {
+                  precioIngresado: ''
+                }
+              })*/
+    </script>
+
+</body>
+
+</html>
