@@ -162,12 +162,12 @@
 
                 doCopy: function () {
                     this.clipboard = `Precio en efectivo: $${this.precioIngresado}
-                                      Precio débito: $${this.precioDebito}
-                                      Precio en cuotas:
-                                      1 cuota de $${this.precioLista }
-                                      3 cuotas de $${this.precioTresCuotas} (total $${this.precioLista})
-                                      6 cuotas de $${this.precioSeisCuotas} (total $${this.precioLista})
-                                      12 cuotas de $${this.precioDoceCuotas} (total $${this.precioLista})`,
+Precio débito: $${this.precioDebito}
+Precio en cuotas:
+1 cuota de $${this.precioLista }
+3 cuotas de $${this.precioTresCuotas} (total $${this.precioLista})
+6 cuotas de $${this.precioSeisCuotas} (total $${this.precioLista})
+12 cuotas de $${this.precioDoceCuotas} (total $${this.precioLista})`,
                     this.$copyText(this.clipboard).then(function (e) {
                         console.log('Copiado: ' + JSON.stringify(e.text))
                     }, function (e) {
