@@ -3,64 +3,61 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow">
     <title>Presupuestador Pinosur</title>
+    <!--Favicon-->
+    <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="img/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="img/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="img/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
     <!--Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <!--main.css-->
+    <link type="text/css" rel="stylesheet" href="css/main.css" />
 
-    <!--VueJS-->
+    <!--VueJS, no sacar del <head>-->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <style>
-        input:not([type]),
-        input[type="text"]:not(.browser-default),
-        input[type="password"]:not(.browser-default),
-        input[type="email"]:not(.browser-default),
-        input[type="url"]:not(.browser-default),
-        input[type="time"]:not(.browser-default),
-        input[type="date"]:not(.browser-default),
-        input[type="datetime"]:not(.browser-default),
-        input[type="datetime-local"]:not(.browser-default),
-        input[type="tel"]:not(.browser-default),
-        input[type="number"]:not(.browser-default),
-        input[type="search"]:not(.browser-default),
-        textarea.materialize-textarea {
-            height: 5rem;
-            font-size: 26px;
-        }
-        
-        div#app {
-            padding-top: 70px;
-        }
-        
-        .input-field .prefix {
-            font-size: 39px;
-            top: 1.2rem;
-        }
-        
-        //centrar icons con texto
-        .icon-align {
-            vertical-align: text-bottom;
-        }
-    </style>
-
+    <script src="js/vue-clipboard2-master/dist/vue-clipboard.min.js"></script>
 </head>
 
 <body>
 
     <div id="app" class="container">
 
+        <div id="menu" class="row">
+
+            <div class="class s12">
+                <a @click="doCopy" class="waves-effect waves-light btn-large">
+                    <i class="material-icons left">content_copy</i>
+                    COPIAR
+                </a>
+            </div>
+
+        </div>
+
         <div class="row">
 
             <div class="input-field col s12">
                 <!-- ICONO para el input -->
                 <i class="material-icons prefix">attach_money</i>
-                <input v-model="precioIngresado" id="pantalla" placeholder="0.00" type="number" class="validate flow-text">
+                <input v-model="precioIngresado" id="pantalla" placeholder="0.00" type="number"
+                    class="validate flow-text">
                 <label for="pantalla">PRECIO EFECTIVO</label>
             </div>
 
@@ -68,7 +65,7 @@
 
         <div class="row">
 
-            <table class="striped highlight col s12 ">
+            <table class="striped highlight col s12">
                 <tbody id="tabla-cuotas">
                     <tr>
                         <td class="brown lighten-5">Precio en efectivo: $ {{ precioIngresado }}</td>
@@ -86,13 +83,16 @@
                         <td class="light-green lighten-4">1 cuota de $ {{ precioLista }}</td>
                     </tr>
                     <tr>
-                        <td class="light-green lighten-3">3 cuotas de $ {{ precioTresCuotas }} (total $ {{ precioLista }})</td>
+                        <td class="light-green lighten-3">3 cuotas de $ {{ precioTresCuotas }} (total $
+                            {{ precioLista }})</td>
                     </tr>
                     <tr>
-                        <td class="light-green lighten-2">6 cuotas de $ {{ precioSeisCuotas }} (total $ {{ precioLista }})</td>
+                        <td class="light-green lighten-2">6 cuotas de $ {{ precioSeisCuotas }} (total $
+                            {{ precioLista }})</td>
                     </tr>
                     <tr>
-                        <td class="light-green lighten-1">12 cuotas de $ {{ precioDoceCuotas }} (total $ {{ precioLista }})</td>
+                        <td class="light-green lighten-1">12 cuotas de $ {{ precioDoceCuotas }} (total $
+                            {{ precioLista }})</td>
                     </tr>
                 </tbody>
             </table>
@@ -113,8 +113,6 @@
             </tbody>
             </table> -->
 
-        <!-- <a class="waves-effect waves-light btn-large " onclick="obtenerContenidoPantalla(event) "><i class="material-icons left ">cloud</i>button</a> -->
-
     </div>
 
 
@@ -123,42 +121,62 @@
 
     <script>
         const app = new Vue({
+
             el: '#app', // elemento sobre el que se aplica vue
             data: {
+                // input
                 precioIngresado: '',
-                n: '1' // solo usado en v-for
+                // solo usado en v-for
+                n: '1',
+                // vacio, para copiar con doCopy(fx de vue-clipboard)
+                clipboard: ''
+
             },
+
             computed: {
-                precioDebito: function() {
-                    return redondear(this.precioIngresado * 1.15);
+
+                precioDebito: function () {
+                    return this.redondear(this.precioIngresado * 1.15);
                 },
-                precioLista: function() {
-                    return redondear(this.precioIngresado * 1.25);
+                precioLista: function () {
+                    return this.redondear(this.precioIngresado * 1.25);
                 },
-                precioTresCuotas: function() {
-                    return redondear(this.precioLista * 3);
+                precioTresCuotas: function () {
+                    return this.redondear(this.precioLista / 3);
                 },
-                precioSeisCuotas: function() {
-                    return redondear(this.precioLista * 6);
+                precioSeisCuotas: function () {
+                    return this.redondear(this.precioLista / 6);
                 },
-                precioDoceCuotas: function() {
-                    return redondear(this.precioLista * 12);
+                precioDoceCuotas: function () {
+                    return this.redondear(this.precioLista / 12);
+                },
+
+            },
+
+            methods: { // se declaran las funciones que se atachan a los eventos que dispara la vista (ie, toggleAlgo()).
+
+                redondear: function (num) {
+                    // existen muchos problemas para redondear precios con decimales en JS, este es el mejor método
+                    return (Math.round(num * Math.pow(10, 2)) / Math.pow(10, 2)).toFixed(2);
+                },
+
+                doCopy: function () {
+                    this.clipboard = `Precio en efectivo: $${this.precioIngresado}
+                                      Precio débito: $${this.precioDebito}
+                                      Precio en cuotas:
+                                      1 cuota de $${this.precioLista }
+                                      3 cuotas de $${this.precioTresCuotas} (total $${this.precioLista})
+                                      6 cuotas de $${this.precioSeisCuotas} (total $${this.precioLista})
+                                      12 cuotas de $${this.precioDoceCuotas} (total $${this.precioLista})`,
+                    this.$copyText(this.clipboard).then(function (e) {
+                        console.log('Copiado: ' + JSON.stringify(e.text))
+                    }, function (e) {
+                        console.log('Error: no pudo copiarse. ' + JSON.stringify(e))
+                    })
                 }
             }
+
         })
-
-        function redondear(num) {
-            // existen muchos problemas para redondear precios con decimales en JS, este es el mejor método
-            return (Math.round(num * Math.pow(10, 2)) / Math.pow(10, 2)).toFixed(2);
-        }
-
-        /*
-              const cuotas = new Vue({
-                el: '#tabla-cuotas', // elemento sobre el que se aplica vue
-                data: {
-                  precioIngresado: ''
-                }
-              })*/
     </script>
 
 </body>
